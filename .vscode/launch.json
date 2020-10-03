@@ -1,0 +1,28 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - PrestoApplication",
+            "request": "launch",
+            "mainClass": "com.presto.PrestoApplication",
+            "projectName": "Presto"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - PrestoApplication",
+            "request": "launch",
+            "mainClass": "com.presto.start.PrestoApplication",
+            "projectName": "Presto"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-PrestoApplication<Presto>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.presto.Presto.PrestoApplication",
+            "projectName": "Presto",
+            "args": ""
+        }
+    ]
+}
