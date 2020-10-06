@@ -64,7 +64,7 @@ public class UsuarioController {
     }
   }
 
-  @GetMapping("/getByEmail/{email}")
+  @GetMapping("/getemail/{email}")
   public ResponseEntity<Usuario> getUsuarioByEmail(@PathVariable("email") String email) {
     Optional<Usuario> usuarioData = usuarioRepository.findByEmailContaining(email);
 

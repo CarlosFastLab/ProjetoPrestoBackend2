@@ -90,8 +90,8 @@ public class CardapioController {
         if (cardapioData.isPresent()) {
             Cardapio _cardapio = cardapio;
            _cardapio.setNome(cardapio.getNome());
-
-            return new ResponseEntity<>(cardapioRepository.save(_cardapio), HttpStatus.OK);
+            cardapioRepository.save(_cardapio);
+            return new ResponseEntity<>(_cardapio, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -99,15 +99,42 @@ public class CardapioController {
 
     @PutMapping("/addproduto/{nome}")
     public ResponseEntity<?> updateCardapioPorNome(@PathVariable("nome") String nome, @RequestBody Produto produto) {
-        Optional<Cardapio> cardapioData = cardapioRepository.findByNomeContaining(nome);
+        try {
+            Optional<Cardapio> cardapioData = cardapioRepository.findByNomeContaining(nome);
 
-        if (cardapioData.isPresent()){
-            cardapioData.get().setProdutos(produto);
-            return new ResponseEntity<>(cardapioRepository.save(cardapioData.get()), HttpStatus.OK);
-        }else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            if (cardapioData.isPresent()) {
+
+                cardapioData.get().setProdutos(produto);
+                produto.setCardapios(cardapioData.get());
+                cardapioRepository.save(cardapioData.get());
+                return new ResponseEntity<>(cardapioData.get(), HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
+    }
+    @PutMapping("/remove/{nome}")
+    public ResponseEntity<?> removeProduto(@PathVariable("nome") String nome, @RequestBody Produto produto) {
+        try {
+            Optional<Cardapio> cardapioData = cardapioRepository.findByNomeContaining(nome);
+
+            if (cardapioData.isPresent()) {
+
+                cardapioData.get().setProdutos(produto);
+                produto.setCardapios(cardapioData.get());
+                cardapioRepository.save(cardapioData.get());
+                return new ResponseEntity<>(cardapioData.get(), HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @DeleteMapping("/delete/{id}")

@@ -11,7 +11,7 @@ public class Cardapio {
 
     private String nome;
 
-    @ManyToMany
+    @OneToMany
     private List<Produto> produtos;
 
     public Cardapio(){}

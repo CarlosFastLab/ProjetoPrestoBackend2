@@ -12,8 +12,8 @@ public class Produto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    @ManyToMany
-    private List<Cardapio> cardapios;
+    @ManyToOne
+    private Cardapio cardapios;
     private String nome;
     private String tipo;
     private String descricao;
@@ -49,7 +49,7 @@ public class Produto {
         return tempo;
     }
 
-    public List<Cardapio> getCardapios() {
+    public Cardapio getCardapios() {
         return cardapios;
     }
 
@@ -81,7 +81,7 @@ public class Produto {
     }
 
     public void setCardapios(Cardapio cardapio) {
-        this.cardapios.add(cardapio);
+        this.cardapios =cardapio;
     }
 
     public void setDescricao(String descricao) {
