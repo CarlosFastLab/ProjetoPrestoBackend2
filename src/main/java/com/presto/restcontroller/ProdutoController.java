@@ -75,20 +75,19 @@ public class ProdutoController {
         }
     }
 
+   // @PutMapping("/addcadapio/")
+
     @PutMapping("/update/{nome}")
-    ResponseEntity<Produto> updateProduto(@RequestBody Produto produto, @PathVariable("nome") String nome){
+    ResponseEntity<Produto> updateProduto( @PathVariable("nome") String nome, @RequestBody Produto produto){
         try{
             Produto produtoData = produtoRepository.findByNomeContaining(nome).get();
             if (produtoData != null){
-                produtoData.setNome(produto.getNome());
-                produtoData.setTipo(produto.getTipo());
-                produtoData.setTempo(produto.getTempo().toString());
-                produtoData.setValor(produto.getValor());
-               // produtoData.setCardapio(produto.getCardapio());
-                produtoData.setImagem(produto.getImagem());
-
-                produtoData.setDescricao(produto.getDescricao());
-
+                if(produto.getNome() != null){produtoData.setNome(produto.getNome());}
+                if (produto.getTipo() != null){produtoData.setTipo(produto.getTipo());}
+                if (produto.getTempo() != null){ produtoData.setTempo(produto.getTempo().toString());}
+                if (produto.getValor() == 0.0){produtoData.setValor(produto.getValor());}
+                if (produto.getImagem() != null){produtoData.setImagem(produto.getImagem());}
+                if (produto.getDescricao() != null){produtoData.setDescricao(produto.getDescricao());}
                 return new ResponseEntity<>(produtoRepository.save(produtoData), HttpStatus.OK);
             }else{
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
