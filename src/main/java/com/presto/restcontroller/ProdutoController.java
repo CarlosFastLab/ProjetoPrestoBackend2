@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin("http://localhost:4200")
 @RestController
@@ -99,5 +100,14 @@ public class ProdutoController {
         }
     }
 
+    @DeleteMapping("/delete/{id}")
+    ResponseEntity<?> deleteProduto( @PathVariable("id") Long id) {
+        Optional<Produto> produto = produtoRepository.findById(id);
+        if (produto.isPresent()) {
+            produtoRepository.delete(produto.get());
+            return new ResponseEntity<>(produto, HttpStatus.GONE);
+        }
+        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    }
 
 }
