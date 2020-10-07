@@ -120,16 +120,13 @@ public class CardapioController {
     @PutMapping("/remove/{nome}")
     public ResponseEntity<?> removeProduto(@PathVariable("nome") String nome, @RequestBody Produto produto) {
         try {
-            Optional<Cardapio> cardapioData = cardapioRepository.findByNomeContaining(nome);
 
-            if (cardapioData.isPresent()) {
+            ResponseEntity cardapioData = cardapioServiceImp.removerProduto(nome, produto.getId());
+            if (cardapioData.getStatusCode() == HttpStatus.OK) {
 
-                cardapioData.get().setProdutos(produto);
-                produto.setCardapios(cardapioData.get());
-                cardapioRepository.save(cardapioData.get());
-                return new ResponseEntity<>(cardapioData.get(), HttpStatus.OK);
+                return new ResponseEntity<>(cardapioData.getBody(), HttpStatus.OK);
             } else {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>(cardapioData.getBody(), HttpStatus.NOT_FOUND);
             }
         } catch (Exception e) {
             e.printStackTrace();

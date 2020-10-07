@@ -40,4 +40,22 @@ public class CardapioServiceImp implements CardapioService{
 
 
     }
+
+    @Override
+    public ResponseEntity<?> removerProduto(String nome, Long id) {
+        Optional<Cardapio> cardapio = cardapioRepository.findByNomeContaining(nome);
+
+        if (cardapio.isPresent()) {
+            for (Produto produto : cardapio.get().getProdutos()) {
+                if (produto.getId() == id) {
+                    cardapio.get().getProdutos().remove(produto);
+                    break;
+                }
+
+            }
+            cardapioRepository.save(cardapio.get());
+            return new ResponseEntity<>(cardapio, HttpStatus.OK);
+        }
+        return new ResponseEntity<>("Produto não encontrado",HttpStatus.NOT_FOUND);
+    }
 }
