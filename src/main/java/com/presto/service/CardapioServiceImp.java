@@ -37,8 +37,6 @@ public class CardapioServiceImp implements CardapioService{
                 return new ResponseEntity<>(listaProdutosRetorno, HttpStatus.OK);
             }
             return new ResponseEntity<>("Cardápio não encontrado", HttpStatus.NOT_FOUND);
-
-
     }
 
     @Override
@@ -51,7 +49,6 @@ public class CardapioServiceImp implements CardapioService{
                     cardapio.get().getProdutos().remove(produto);
                     break;
                 }
-
             }
             cardapioRepository.save(cardapio.get());
             return new ResponseEntity<>(cardapio, HttpStatus.OK);
