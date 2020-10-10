@@ -17,5 +17,4 @@ public class PrestoApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PrestoApplication.class, args);
 	}
-
 }
