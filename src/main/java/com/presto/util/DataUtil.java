@@ -8,7 +8,7 @@ import java.util.Date;
 
 @Component
 public class DataUtil {
-    public static SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss,SSS");
+    public static SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 
     private static Date horaTempo;
 

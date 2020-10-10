@@ -6,4 +6,5 @@ import org.springframework.http.ResponseEntity;
 public interface UsuarioService {
 
     ResponseEntity<?> validaEmail(String email);
+    ResponseEntity<?> enviaSenhaPorEmail(String email);
 }

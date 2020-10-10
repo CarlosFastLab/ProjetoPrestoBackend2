@@ -106,6 +106,15 @@ public class UsuarioController {
     }
   }
 
+  @PutMapping("/redefinirsenha/{email}")
+  public ResponseEntity<?> redefinirSenha(@PathVariable("email") String email){
+    ResponseEntity retorno = usuarioService.enviaSenhaPorEmail(email);
+   return new ResponseEntity<>(retorno.getBody(), retorno.getStatusCode());
+
+
+  }
+
+
   @DeleteMapping("/delete/{id}")
   public ResponseEntity<HttpStatus> deleteUsuario(@PathVariable("id") long id) {
     try {
