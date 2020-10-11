@@ -108,10 +108,14 @@ public class UsuarioController {
 
   @PutMapping("/redefinirsenha/{email}")
   public ResponseEntity<?> redefinirSenha(@PathVariable("email") String email){
-    ResponseEntity retorno = usuarioService.enviaSenhaPorEmail(email);
-   return new ResponseEntity<>(retorno.getBody(), retorno.getStatusCode());
-
-
+    Optional<Usuario> usuario = usuarioRepository.findByEmailContaining(email);
+    if (usuario.isPresent()) {
+      ResponseEntity retorno = usuarioService.enviaSenhaPorEmail(email);
+      System.out.println("Usuário localizado.");
+      return new ResponseEntity<>(usuario, HttpStatus.OK);
+    }
+    System.out.println("Usuário não localizado.");
+    return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
   }
 
 

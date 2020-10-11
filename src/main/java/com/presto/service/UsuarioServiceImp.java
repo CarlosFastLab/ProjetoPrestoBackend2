@@ -46,9 +46,9 @@ public class UsuarioServiceImp implements  UsuarioService{
 
            javamail.enviarEmail(email, senha);
 
-           return new ResponseEntity<>("Email enviado!", HttpStatus.OK);
+           return new ResponseEntity<>("Email enviado!", HttpStatus.ACCEPTED);
        }
-       return new ResponseEntity<>("Usuario inexistente!", HttpStatus.NOT_FOUND);
+       return new ResponseEntity<>("Usuario inexistente!", HttpStatus.INTERNAL_SERVER_ERROR);
 
     }
 
