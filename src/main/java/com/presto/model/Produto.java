@@ -5,7 +5,6 @@ import com.presto.util.DataUtil;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 public class Produto {
@@ -18,12 +17,15 @@ public class Produto {
     private String tipo;
     private String descricao;
     private Date tempo;
+
+    @Lob
     private String imagem;
+
     private double valor;
 
     public Produto(){}
 
-    public Produto(String nome, String tipo, String tempo,  String descricao, String imagem){
+    public Produto(String nome, String tipo, String tempo, String descricao, String imagem){
         this.nome = nome;
         this.tipo = tipo;
 
@@ -81,7 +83,7 @@ public class Produto {
     }
 
     public void setCardapios(Cardapio cardapio) {
-        this.cardapios =cardapio;
+        this.cardapios = cardapio;
     }
 
     public void setDescricao(String descricao) {

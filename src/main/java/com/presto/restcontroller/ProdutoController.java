@@ -20,7 +20,7 @@ public class ProdutoController {
 
     @PostMapping("/create")
     ResponseEntity<Produto> createProduto(@RequestBody Produto produto){
-        try{            
+        try{
             produtoRepository.save(produto);
             return new ResponseEntity<>(produto, HttpStatus.CREATED);
         }
