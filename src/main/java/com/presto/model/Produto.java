@@ -19,13 +19,13 @@ public class Produto {
     private Date tempo;
 
     @Lob
-    private String imagem;
+    private byte[] imagem;
 
     private double valor;
 
     public Produto(){}
 
-    public Produto(String nome, String tipo, String tempo, String descricao, String imagem){
+    public Produto(String nome, String tipo, String tempo, String descricao, byte[] imagem){
         this.nome = nome;
         this.tipo = tipo;
 
@@ -63,7 +63,7 @@ public class Produto {
         return descricao;
     }
 
-    public String getImagem() {
+    public byte[] getImagem() {
         return imagem;
     }
 
@@ -90,7 +90,7 @@ public class Produto {
         this.descricao = descricao;
     }
 
-    public void setImagem(String imagem) {
+    public void setImagem(byte[] imagem) {
         this.imagem = imagem;
     }
 
