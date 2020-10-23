@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,8 +21,9 @@ public class ProdutoController {
     ProdutoRepository produtoRepository;
 
     @PostMapping("/create")
-    ResponseEntity<Produto> createProduto(@RequestBody Produto produto){
+    ResponseEntity<Produto> createProduto(@ModelAttribute Produto produto, @RequestPart("file")MultipartFile file){
         try{
+            produto.setImagem(file.getBytes());
             produtoRepository.save(produto);
             return new ResponseEntity<>(produto, HttpStatus.CREATED);
         }
