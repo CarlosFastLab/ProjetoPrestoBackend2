@@ -21,7 +21,7 @@ public class ProdutoController {
     ProdutoRepository produtoRepository;
 
     @PostMapping("/create")
-    ResponseEntity<Produto> createProduto(@ModelAttribute Produto produto, @RequestPart("file")MultipartFile file){
+    ResponseEntity<?> createProduto(@ModelAttribute Produto produto, @RequestPart("file")MultipartFile file){
         try{
             produto.setImagem(file.getBytes());
             produtoRepository.save(produto);

@@ -5,6 +5,7 @@ import com.presto.util.DataUtil;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Produto {
@@ -13,6 +14,9 @@ public class Produto {
     private long id;
     @ManyToOne
     private Cardapio cardapios;
+
+    @ManyToMany(mappedBy = "itensDoPedido")
+    private List<Pedido> pedido;
     private String nome;
     private String tipo;
     private String descricao;
@@ -20,12 +24,12 @@ public class Produto {
 
     @Lob
     private byte[] imagem;
-
+    
     private double valor;
 
     public Produto(){}
 
-    public Produto(String nome, String tipo, String tempo, String descricao, byte[] imagem){
+    public Produto(String nome, String tipo, String tempo,  String descricao, byte[] imagem){
         this.nome = nome;
         this.tipo = tipo;
 
@@ -34,6 +38,13 @@ public class Produto {
         this.imagem = imagem;
     }
 
+    public List<Pedido> getPedido() {
+        return this.pedido;
+    }
+
+    public void setPedido(Pedido pedido) {
+        this.pedido.add(pedido);
+    }
 
     public long getId() {
         return id;
@@ -83,7 +94,7 @@ public class Produto {
     }
 
     public void setCardapios(Cardapio cardapio) {
-        this.cardapios = cardapio;
+        this.cardapios =cardapio;
     }
 
     public void setDescricao(String descricao) {
