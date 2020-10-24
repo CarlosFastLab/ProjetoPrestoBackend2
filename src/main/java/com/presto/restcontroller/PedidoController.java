@@ -12,10 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@RequestMapping("pedido")
+@RestController
 public class PedidoController {
     PedidoRepository pedidoRepository;
     @PostMapping("/create")
-    public ResponseEntity<?> criarMesa(@RequestBody Pedido pedido){
+    public ResponseEntity<?> criarPedido(@RequestBody Pedido pedido){
         if(pedido != null){
             return new ResponseEntity<>(pedidoRepository.save(pedido), HttpStatus.OK);
         }
@@ -23,7 +25,7 @@ public class PedidoController {
         return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @GetMapping("/mesas")
+    @GetMapping("/pedidos")
     public ResponseEntity<List<Pedido>> getAllMesas(){
         List<Pedido> pedidos = new ArrayList<Pedido>();
         pedidoRepository.findAll().forEach(pedidos::add);
