@@ -37,7 +37,9 @@ public class ProdutoController {
     ResponseEntity<List<Produto>> getAllProdutos(){
         try{
             List<Produto> produtos = new ArrayList<Produto>();
+
             produtoRepository.findAll().forEach(produtos::add);
+
 
             if(produtos.isEmpty()){
             return  new ResponseEntity<>(HttpStatus.NO_CONTENT);
