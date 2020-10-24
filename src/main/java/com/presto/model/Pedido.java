@@ -47,7 +47,7 @@ public class Pedido {
         return itensDoPedido;
     }
 
-    public void setItensDoPedido(List<Produto> itensDoPedido) {
-        this.itensDoPedido = itensDoPedido;
+    public void setItensDoPedido(Produto itensDoPedido) {
+        this.itensDoPedido.add(itensDoPedido);
     }
 }
