@@ -15,8 +15,8 @@ public class Produto {
     @ManyToOne
     private Cardapio cardapios;
 
-    @ManyToMany(mappedBy = "itensDoPedido")
-    private List<Pedido> pedido;
+//    @ManyToMany(mappedBy = "itensDoPedido")
+//    private List<Pedido> pedido;
     private String nome;
     private String tipo;
     private String descricao;
@@ -38,13 +38,13 @@ public class Produto {
         this.imagem = imagem;
     }
 
-    public List<Pedido> getPedido() {
-        return this.pedido;
-    }
-
-    public void setPedido(Pedido pedido) {
-        this.pedido.add(pedido);
-    }
+//    public List<Pedido> getPedido() {
+//        return this.pedido;
+//    }
+//
+//    public void setPedido(Pedido pedido) {
+//        this.pedido.add(pedido);
+//    }
 
     public long getId() {
         return id;

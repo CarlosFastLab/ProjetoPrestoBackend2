@@ -9,7 +9,7 @@ import javax.persistence.Id;
 
 
 
-@Entity 
+@Entity
 public class Usuario{
 
     
@@ -23,6 +23,7 @@ public class Usuario{
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private long id;
+
     
     public Usuario(){}
 
