@@ -2,6 +2,7 @@ package com.presto.restcontroller;
 
 import com.presto.model.Produto;
 import com.presto.repository.ProdutoRepository;
+import com.presto.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,13 +20,20 @@ import java.util.Optional;
 public class ProdutoController {
     @Autowired
     ProdutoRepository produtoRepository;
+    @Autowired
+    ProdutoService produtoService;
 
     @PostMapping("/create")
     ResponseEntity<?> createProduto(@ModelAttribute Produto produto, @RequestPart("file")MultipartFile file){
         try{
-            produto.setImagem(file.getBytes());
-            produtoRepository.save(produto);
-            return new ResponseEntity<>(produto, HttpStatus.CREATED);
+            ResponseEntity statusImagem = produtoService.salvarImagem(file);
+
+            if (statusImagem.getStatusCode().equals(HttpStatus.ACCEPTED)) {
+                produto.setImagem("" + file.getOriginalFilename());
+                produtoRepository.save(produto);
+                return new ResponseEntity<>(produto, HttpStatus.CREATED);
+            }
+            return new ResponseEntity<>("falhou ao salvar imagem", HttpStatus.EXPECTATION_FAILED);
         }
         catch (Exception e){
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
