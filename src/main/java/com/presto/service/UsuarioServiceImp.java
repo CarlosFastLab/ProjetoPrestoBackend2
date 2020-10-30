@@ -22,7 +22,7 @@ public class UsuarioServiceImp implements  UsuarioService{
         if(usuario.isPresent()){
             return new ResponseEntity<>("Usuario existente!", HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(false, HttpStatus.OK);
+        return new ResponseEntity<>("Usuario não existe. Pode cadastrar!", HttpStatus.OK);
     }
 
     @Override

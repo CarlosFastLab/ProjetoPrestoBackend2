@@ -66,6 +66,5 @@ public class Usuario{
     public void setDataNascimento(String dataDeNascimento){
        this.dataNascimento = dataDeNascimento;
     }
-    
 
 }
