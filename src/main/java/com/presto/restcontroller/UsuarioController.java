@@ -78,12 +78,14 @@ public class UsuarioController {
   @PostMapping("/create")
   public ResponseEntity<?> createUsuario(@RequestBody Usuario usuario) {
     try {
-      ResponseEntity usuario1 = usuarioService.validaEmail(usuario.getEmail());
-      if(usuario1.getStatusCode()== HttpStatus.OK) {
-        Usuario _usuario = usuarioRepository.save(new Usuario(usuario.getNome(), usuario.getEmail(), usuario.getSenha(), usuario.getDataNascimento()));
-        return new ResponseEntity<>(_usuario, HttpStatus.CREATED);
+      ResponseEntity respostaDoServico = usuarioService.validaEmail(usuario.getEmail());
+      if(respostaDoServico.getStatusCode()== HttpStatus.OK) {
+//        Usuario _usuario = new Usuario(usuario.getNome(), usuario.getEmail(), usuario.getSenha(), usuario.getDataNascimento()) ;
+
+        usuarioRepository.save(usuario);
+        return new ResponseEntity<>(usuario, HttpStatus.CREATED);
       }
-      return new ResponseEntity<>(usuario1.getBody(), usuario1.getStatusCode());
+      return new ResponseEntity<>(respostaDoServico.getBody(), respostaDoServico.getStatusCode());
     } catch (Exception e) {
       e.printStackTrace();
       return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
