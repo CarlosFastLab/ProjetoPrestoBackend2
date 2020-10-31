@@ -1,17 +1,18 @@
 package com.presto.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
-public class Cardapio {
+public class Cardapio implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     private String nome;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cardapios")
     private List<Produto> produtos;
 
 

@@ -1,25 +1,21 @@
 package com.presto.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
-import java.util.List;
+import java.io.Serializable;
+
 
 @Entity
-public class Mesa {
+public class Mesa implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     private  String nome;
 
-    @JsonBackReference
-    @OneToOne
-    @JoinTable(name = "mesa_pedido",
-    joinColumns = @JoinColumn(name = "mesa_id"),
-    inverseJoinColumns = @JoinColumn(name = "pedido_id"))
-    private List<Pedido> pedido;
+
+    @OneToOne(mappedBy = "mesa")
+    private Pedido pedido;
 
 
     public Mesa() {
@@ -27,7 +23,7 @@ public class Mesa {
 
     public Mesa(String nome, Pedido pedido) {
         this.nome = nome;
-        this.pedido = (List<Pedido>) pedido;
+        this.pedido =  pedido;
     }
 
     public long getId() {
@@ -46,13 +42,11 @@ public class Mesa {
         this.nome = nome;
     }
 
-    public List<Pedido> getPedido() {
-        return this.pedido;
+    public Pedido getPedido() {
+        return pedido;
     }
 
     public void setPedido(Pedido pedido) {
-        this.pedido.add(pedido);
+        this.pedido = pedido;
     }
-
-
 }

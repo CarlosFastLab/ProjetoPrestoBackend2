@@ -1,22 +1,28 @@
 package com.presto.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
-public class Pedido {
+public class Pedido implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToMany(mappedBy = "pedido")
-    private List<Mesa> mesas;
+    @JsonIgnore
+    @OneToOne
+    @JoinColumn(name = "mesa_id")
+    private Mesa mesa;
 
     private String descricao;
+
+    private Double valorTodal;
 
     @ManyToMany
     @JoinTable(name = "pedido_produto",
@@ -27,6 +33,12 @@ public class Pedido {
     public Pedido() {
     }
 
+    public Pedido(long id, Mesa mesa, String descricao, Double valorTodal) {
+        this.id = id;
+        this.mesa = mesa;
+        this.descricao = descricao;
+        this.valorTodal = valorTodal;
+    }
 
     public long getId() {
         return id;
@@ -36,12 +48,12 @@ public class Pedido {
         this.id = id;
     }
 
-    public List<Mesa> getMesa() {
-        return mesas;
+    public Mesa getMesa() {
+        return mesa;
     }
 
     public void setMesa(Mesa mesa) {
-        this.mesas.add(mesa);
+        this.mesa = mesa;
     }
 
     public List<Produto> getItensDoPedido() {
