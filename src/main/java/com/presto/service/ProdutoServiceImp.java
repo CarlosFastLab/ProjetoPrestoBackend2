@@ -1,9 +1,5 @@
 package com.presto.service;
 
-import com.presto.model.Produto;
-import com.presto.model.ProdutoRetorno;
-import com.presto.repository.ProdutoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -13,16 +9,15 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 
 @Service
 public class ProdutoServiceImp implements ProdutoService {
 
     @Override
     public ResponseEntity<?> salvarImagem(MultipartFile file) {
-        String UPLOADER_FOLDER = "C:/Users/charlinho/Documents/UNIFOR/ADS/PA 2/ProjetoPresto Front/ProjetoPresto/Angular/Presto/src/assets/imagens/";
+       // String UPLOADER_FOLDER = "C:/Users/charlinho/Documents/UNIFOR/ADS/PA 2/ProjetoPresto Front/ProjetoPresto/Angular/Presto/src/assets/imagens/";
 //        String UPLOADER_FOLDER = "C:/Users/clail/Documents/github/ProjetoPresto/Angular/Presto/src/assets/imagens";
-//        String UPLOADER_FOLDER = "C:/Users/Ezequiel/Documents/Projetos/Versões Presto git/ProjetoPresto/Angular/Presto/src/assets";
+        String UPLOADER_FOLDER = "C:/Users/Ezequiel/Documents/Projetos/Versões Presto git/ProjetoPresto/Angular/Presto/src/assets";
 
         if (file.isEmpty()) {
             return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);

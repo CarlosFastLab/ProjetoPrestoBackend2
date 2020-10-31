@@ -1,28 +1,36 @@
 package com.presto.model;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.presto.util.DataUtil;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 @Entity
-public class Produto {
+public class Produto implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
+    @JsonIgnore
     @ManyToOne
+    @JoinTable(name = "cardapio_produto",
+     joinColumns = @JoinColumn(name = "cardapio_id"),
+    inverseJoinColumns = @JoinColumn(name = "produto_id"))
     private Cardapio cardapios;
 
-//    @ManyToMany(mappedBy = "itensDoPedido")
-//    private List<Pedido> pedido;
+    @JsonIgnore
+    @ManyToMany(mappedBy = "itensDoPedido")
+    private List<Pedido> pedido;
     private String nome;
     private String tipo;
     private String descricao;
+    @JsonFormat(pattern = "HH:mm:ss")
     private Date tempo;
-
-//    @Lob
     private String imagem;
     
     private double valor;
@@ -38,13 +46,13 @@ public class Produto {
         this.imagem = imagem;
     }
 
-//    public List<Pedido> getPedido() {
-//        return this.pedido;
-//    }
-//
-//    public void setPedido(Pedido pedido) {
-//        this.pedido.add(pedido);
-//    }
+    public List<Pedido> getPedido() {
+        return this.pedido;
+    }
+
+    public void setPedido(Pedido pedido) {
+        this.pedido.add(pedido);
+    }
 
     public long getId() {
         return id;
