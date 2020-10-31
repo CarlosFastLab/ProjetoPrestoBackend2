@@ -1,5 +1,8 @@
 package com.presto.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -11,7 +14,8 @@ public class Mesa {
 
     private  String nome;
 
-    @ManyToMany
+    @JsonBackReference
+    @OneToOne
     @JoinTable(name = "mesa_pedido",
     joinColumns = @JoinColumn(name = "mesa_id"),
     inverseJoinColumns = @JoinColumn(name = "pedido_id"))

@@ -3,6 +3,7 @@ package com.presto.restcontroller;
 import com.presto.model.Mesa;
 import com.presto.model.Pedido;
 import com.presto.repository.MesaRepository;
+import com.presto.repository.PedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,9 @@ import java.util.Optional;
 public class MesaController {
     @Autowired
     private MesaRepository mesaRepository;
+
+    @Autowired
+    private PedidoRepository pedidoRepository;
 
     @PostMapping("/create")
     public ResponseEntity<?> criarMesa(@RequestBody Mesa mesa){
@@ -38,7 +42,9 @@ public class MesaController {
     @PutMapping("/addpedido/{nome}")
     public ResponseEntity<?> addPedido(@PathVariable("nome") String nome, @RequestBody Pedido pedido){
         Optional<Mesa> mesa = mesaRepository.findByNomeContaining(nome);
+
         if (mesa.isPresent()){
+            pedidoRepository.save(pedido);
             mesa.get().setPedido(pedido);
             mesaRepository.save(mesa.get());
             return new ResponseEntity<>(mesa.get(),HttpStatus.OK);
