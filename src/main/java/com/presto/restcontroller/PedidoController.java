@@ -4,6 +4,7 @@ import com.presto.model.Mesa;
 import com.presto.model.Pedido;
 import com.presto.model.Produto;
 import com.presto.repository.PedidoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,17 +13,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin
 @RequestMapping("pedido")
 @RestController
 public class PedidoController {
+    @Autowired
     PedidoRepository pedidoRepository;
     @PostMapping("/create")
     public ResponseEntity<?> criarPedido(@RequestBody Pedido pedido){
-        if(pedido != null){
-            return new ResponseEntity<>(pedidoRepository.save(pedido), HttpStatus.OK);
+        try {
+            Pedido _pedido = pedidoRepository.save(pedido);
+            return new ResponseEntity<>(_pedido, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
         }
-
-        return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+//        if(pedido != null){
+//            return new ResponseEntity<>(pedidoRepository.save(pedido), HttpStatus.OK);
+//        }
+//
+//        return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @GetMapping("/pedidos")

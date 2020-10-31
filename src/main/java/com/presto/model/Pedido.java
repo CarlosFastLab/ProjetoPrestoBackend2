@@ -1,5 +1,8 @@
 package com.presto.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -9,8 +12,11 @@ public class Pedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     @ManyToMany(mappedBy = "pedido")
     private List<Mesa> mesas;
+
+    private String descricao;
 
     @ManyToMany
     @JoinTable(name = "pedido_produto",
@@ -18,14 +24,9 @@ public class Pedido {
     inverseJoinColumns = @JoinColumn(name = "produto_id"))
     private List<Produto> itensDoPedido;
 
-
     public Pedido() {
     }
 
-    public Pedido(List<Mesa> mesa, List<Produto> itensDoPedido) {
-        this.mesas = mesa;
-        this.itensDoPedido = itensDoPedido;
-    }
 
     public long getId() {
         return id;
@@ -49,5 +50,13 @@ public class Pedido {
 
     public void setItensDoPedido(Produto itensDoPedido) {
         this.itensDoPedido.add(itensDoPedido);
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 }
