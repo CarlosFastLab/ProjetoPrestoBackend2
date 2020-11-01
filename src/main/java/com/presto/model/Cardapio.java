@@ -2,6 +2,7 @@ package com.presto.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -12,8 +13,11 @@ public class Cardapio implements Serializable {
 
     private String nome;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cardapios")
-    private List<Produto> produtos;
+    @OneToMany
+    @JoinTable(name = "cardapio_produto",
+            joinColumns = @JoinColumn(name = "cardapio_id"),
+            inverseJoinColumns = @JoinColumn(name = "produto_id"))
+    private List<Produto> produtos = new ArrayList<>();
 
 
 
@@ -41,5 +45,9 @@ public class Cardapio implements Serializable {
 
     public void setProdutos(Produto produto) {
         this.produtos.add(produto);
+    }
+
+    public void setProdutos(List<Produto> produtos) {
+        this.produtos = produtos;
     }
 }

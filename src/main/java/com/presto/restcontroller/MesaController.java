@@ -45,10 +45,11 @@ public class MesaController {
         Optional<Mesa> mesa = mesaRepository.findByNomeContaining(nome);
 
         if (mesa.isPresent()){
-            pedidoRepository.save(pedido);
+
+            Pedido pedido1 = pedidoRepository.save(pedido);
             mesa.get().setPedido(pedido);
             mesaRepository.save(mesa.get());
-            return new ResponseEntity<>(mesa.get(),HttpStatus.OK);
+            return new ResponseEntity<>(pedido1,HttpStatus.OK);
         }
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
