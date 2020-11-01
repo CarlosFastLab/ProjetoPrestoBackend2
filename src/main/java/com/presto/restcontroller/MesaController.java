@@ -4,6 +4,7 @@ import com.presto.model.Mesa;
 import com.presto.model.Pedido;
 import com.presto.repository.MesaRepository;
 import com.presto.repository.PedidoRepository;
+import com.presto.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
