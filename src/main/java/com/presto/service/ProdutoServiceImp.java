@@ -15,9 +15,9 @@ public class ProdutoServiceImp implements ProdutoService {
 
     @Override
     public ResponseEntity<?> salvarImagem(MultipartFile file) {
-       // String UPLOADER_FOLDER = "C:/Users/charlinho/Documents/UNIFOR/ADS/PA 2/ProjetoPresto Front/ProjetoPresto/Angular/Presto/src/assets/imagens/";
+        String UPLOADER_FOLDER = "C:/Users/charlinho/Documents/UNIFOR/ADS/PA 2/ProjetoPresto Front/ProjetoPresto/Angular/Presto/src/assets/imagens/";
 //        String UPLOADER_FOLDER = "C:/Users/clail/Documents/github/ProjetoPresto/Angular/Presto/src/assets/imagens";
-        String UPLOADER_FOLDER = "C:/Users/Ezequiel/Documents/Projetos/Versões Presto git/ProjetoPresto/Angular/Presto/src/assets";
+//        String UPLOADER_FOLDER = "C:/Users/Ezequiel/Documents/Projetos/Versões Presto git/ProjetoPresto/Angular/Presto/src/assets";
 
         if (file.isEmpty()) {
             return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
