@@ -17,10 +17,7 @@ public class Produto implements Serializable {
     private long id;
 
     @JsonIgnore
-    @ManyToOne
-    @JoinTable(name = "cardapio_produto",
-     joinColumns = @JoinColumn(name = "cardapio_id"),
-    inverseJoinColumns = @JoinColumn(name = "produto_id"))
+    @ManyToOne(cascade = CascadeType.ALL)
     private Cardapio cardapios;
 
     @JsonIgnore
@@ -66,8 +63,8 @@ public class Produto implements Serializable {
         return tipo;
     }
 
-    public Date getTempo() {
-        return tempo;
+    public String getTempo() {
+        return tempo.toString();
     }
 
     public Cardapio getCardapios() {
@@ -99,6 +96,10 @@ public class Produto implements Serializable {
 
     public void setTempo(String tempo) {
         this.tempo =  DataUtil.convertToDate(tempo);
+    }
+
+    public void setTempo(Date tempo) {
+        this.tempo = tempo;
     }
 
     public void setCardapios(Cardapio cardapio) {

@@ -44,12 +44,14 @@ public class CardapioServiceImp implements CardapioService{
         Optional<Cardapio> cardapio = cardapioRepository.findByNomeContaining(nome);
 
         if (cardapio.isPresent()) {
+            List<Produto> listaDeProdutosAux= new ArrayList<>();
+
             for (Produto produto : cardapio.get().getProdutos()) {
-                if (produto.getId() == id) {
-                    cardapio.get().getProdutos().remove(produto);
-                    break;
+                if (produto.getId() != id) {
+                   listaDeProdutosAux.add(produto);
                 }
             }
+            cardapio.get().setProdutos(listaDeProdutosAux);
             cardapioRepository.save(cardapio.get());
             return new ResponseEntity<>(cardapio, HttpStatus.OK);
         }

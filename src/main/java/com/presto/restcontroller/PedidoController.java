@@ -23,6 +23,7 @@ public class PedidoController {
     public ResponseEntity<?> criarPedido(@RequestBody Pedido pedido){
         try {
             Pedido _pedido = pedidoRepository.save(pedido);
+
             return new ResponseEntity<>(_pedido, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
