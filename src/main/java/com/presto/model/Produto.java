@@ -63,8 +63,8 @@ public class Produto implements Serializable {
         return tipo;
     }
 
-    public String getTempo() {
-        return tempo.toString();
+    public Date getTempoDate() {
+        return tempo;
     }
 
     public Cardapio getCardapios() {
@@ -84,7 +84,9 @@ public class Produto implements Serializable {
     }
 
 
-
+    public String getTempo() {
+        return this.tempo.toString();
+    }
 
     public void setNome(String nome) {
         this.nome = nome;
