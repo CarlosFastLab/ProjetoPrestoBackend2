@@ -45,11 +45,21 @@ public class MesaController {
         Optional<Mesa> mesa = mesaRepository.findByNomeContaining(nome);
 
         if (mesa.isPresent()){
-
+            pedido.setMesa(mesa.get());
             Pedido pedido1 = pedidoRepository.save(pedido);
             mesa.get().setPedido(pedido);
             mesaRepository.save(mesa.get());
             return new ResponseEntity<>(pedido1,HttpStatus.OK);
+        }
+        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping("/getpedidomesa/{id}")
+    public ResponseEntity<?> getPedidoDaMesa(@PathVariable("id") long id){
+        Mesa mesa = mesaRepository.findById(id).get();
+        if (mesa != null) {
+            Pedido pedido = mesa.getPedido();
+            return new ResponseEntity<>(pedido, HttpStatus.OK);
         }
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }

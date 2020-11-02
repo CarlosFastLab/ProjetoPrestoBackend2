@@ -98,7 +98,7 @@ public class ProdutoController {
             if (produtoData != null){
                 if(produto.getNome() != null){produtoData.setNome(produto.getNome());}
                 if (produto.getTipo() != null){produtoData.setTipo(produto.getTipo());}
-                if (produto.getTempo() != null){ produtoData.setTempo(produto.getTempo().toString());}
+                if (produto.getTempo() != null){ produtoData.setTempo(produto.getTempo());}
                 if (produto.getValor() == 0.0){produtoData.setValor(produto.getValor());}
                 if (produto.getImagem() != null){produtoData.setImagem(produto.getImagem());}
                 if (produto.getDescricao() != null){produtoData.setDescricao(produto.getDescricao());}
