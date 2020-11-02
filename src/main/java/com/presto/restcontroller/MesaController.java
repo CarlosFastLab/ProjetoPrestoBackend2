@@ -5,6 +5,8 @@ import com.presto.model.Pedido;
 import com.presto.repository.MesaRepository;
 import com.presto.repository.PedidoRepository;
 import com.presto.repository.ProdutoRepository;
+import com.presto.service.MesaService;
+import com.presto.service.MesaServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +25,9 @@ public class MesaController {
 
     @Autowired
     private PedidoRepository pedidoRepository;
+
+    @Autowired
+    private MesaService mesaService;
 
     @PostMapping("/create")
     public ResponseEntity<?> criarMesa(@RequestBody Mesa mesa){
@@ -52,6 +57,12 @@ public class MesaController {
             return new ResponseEntity<>(pedido1,HttpStatus.OK);
         }
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    }
+
+    @PutMapping("/removepedido/{idMesa}/{idPedido}")
+    public ResponseEntity<?> removePedido(@PathVariable("idMesa") long idMesa, @PathVariable("idPedido") long idPedido) {
+        ResponseEntity retorno = mesaService.removePedido(idMesa, idPedido);
+        return new ResponseEntity<>(retorno.getBody(), retorno.getStatusCode());
     }
 
     @GetMapping("/getpedidomesa/{id}")
