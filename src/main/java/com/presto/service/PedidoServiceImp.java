@@ -20,4 +20,18 @@ public class PedidoServiceImp implements PedidoService {
         }
         return precoTotal;
     }
+
+    @Override
+    public long pegarMaiorTempo(List<Produto> produtos) {
+        long maiorTempo = 0;
+        for (Produto produto : produtos){
+
+            if(produto.getTempo() > maiorTempo){
+                maiorTempo = produto.getTempo();
+            }
+
+        }
+
+        return maiorTempo;
+    }
 }

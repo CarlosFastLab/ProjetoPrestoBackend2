@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface PedidoService {
     Double somarTodal(List<Produto> produtos);
+    long pegarMaiorTempo(List<Produto> produtos);
 }

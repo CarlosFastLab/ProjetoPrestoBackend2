@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -23,6 +24,8 @@ public class Pedido implements Serializable {
     private String descricao;
 
     private Double valorTotal;
+
+    private long maiorTempo;
 
     @ManyToMany
     @JoinTable(name = "pedido_produto",
@@ -78,5 +81,13 @@ public class Pedido implements Serializable {
 
     public void setValorTotal(Double valorTotal) {
         this.valorTotal = valorTotal;
+    }
+
+    public long getMaiorTempo() {
+        return maiorTempo;
+    }
+
+    public void setMaiorTempo(long maiorTempo) {
+        this.maiorTempo = maiorTempo;
     }
 }

@@ -68,6 +68,7 @@ public class PedidoController {
                 pedido.get().setItensDoPedido(produto);
             }
             pedido.get().setValorTotal(pedidoService.somarTodal(pedido.get().getItensDoPedido()));
+            pedido.get().setMaiorTempo(pedidoService.pegarMaiorTempo(pedido.get().getItensDoPedido()));
             return new ResponseEntity<>(pedidoRepository.save(pedido.get()), HttpStatus.OK);
         }
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
