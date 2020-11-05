@@ -4,6 +4,7 @@ import com.presto.model.Mesa;
 import com.presto.model.Pedido;
 import com.presto.model.Produto;
 import com.presto.repository.PedidoRepository;
+import com.presto.service.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,10 @@ import java.util.Optional;
 public class PedidoController {
     @Autowired
     PedidoRepository pedidoRepository;
+
+    @Autowired
+    PedidoService pedidoService;
+
     @PostMapping("/create")
     public ResponseEntity<?> criarPedido(@RequestBody Pedido pedido){
         try {
@@ -59,9 +64,10 @@ public class PedidoController {
         Optional<Pedido> pedido = pedidoRepository.findById(id);
 
         if (pedido.isPresent()){
-            for(Produto produto : produtos ){
+            for(Produto produto : produtos ) {
                 pedido.get().setItensDoPedido(produto);
             }
+            pedido.get().setValorTotal(pedidoService.somarTodal(pedido.get().getItensDoPedido()));
             return new ResponseEntity<>(pedidoRepository.save(pedido.get()), HttpStatus.OK);
         }
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);

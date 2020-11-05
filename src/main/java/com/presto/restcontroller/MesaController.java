@@ -52,6 +52,7 @@ public class MesaController {
         if (mesa.isPresent()){
             pedido.setMesa(mesa.get());
             Pedido pedido1 = pedidoRepository.save(pedido);
+
             mesa.get().setPedido(pedido);
             mesaRepository.save(mesa.get());
             return new ResponseEntity<>(pedido1,HttpStatus.OK);
