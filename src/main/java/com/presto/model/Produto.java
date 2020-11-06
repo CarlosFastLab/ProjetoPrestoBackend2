@@ -27,18 +27,17 @@ public class Produto implements Serializable {
     private String tipo;
     private String descricao;
     @JsonFormat(pattern = "HH:mm:ss")
-    private Date tempo;
+    private Integer tempo;
     private String imagem;
     
     private double valor;
 
     public Produto(){}
 
-    public Produto(String nome, String tipo, String tempo,  String descricao, String imagem){
+    public Produto(String nome, String tipo, Integer tempo,  String descricao, String imagem){
         this.nome = nome;
         this.tipo = tipo;
-
-        this.tempo = new DataUtil().convertToDate(tempo);
+        this.tempo = tempo;
         this.descricao = descricao;
         this.imagem = imagem;
     }
@@ -63,7 +62,7 @@ public class Produto implements Serializable {
         return tipo;
     }
 
-    public Date getTempoDate() {
+    public Integer getTempo() {
         return tempo;
     }
 
@@ -84,9 +83,6 @@ public class Produto implements Serializable {
     }
 
 
-    public String getTempo() {
-        return this.tempo.toString();
-    }
 
     public void setNome(String nome) {
         this.nome = nome;
@@ -96,13 +92,11 @@ public class Produto implements Serializable {
         this.tipo = tipo;
     }
 
-    public void setTempo(String tempo) {
-        this.tempo =  DataUtil.convertToDate(tempo);
-    }
-
-    public void setTempo(Date tempo) {
+    public void setTempo(Integer tempo) {
         this.tempo = tempo;
     }
+
+
 
     public void setCardapios(Cardapio cardapio) {
         this.cardapios =cardapio;

@@ -32,7 +32,7 @@ public class PrestoController {
         Cardapio cardapio = new Cardapio("Geral");
         cardapioRepository.save(cardapio);
 
-        Produto produto = new Produto("Coca-cola", "bebida", "00:10:00", "coca lata de 350ml",null);
+        Produto produto = new Produto("Coca-cola", "bebida", 1, "coca lata de 350ml","cocacolalata.png");
         produtoRepository.save(produto);
 
         return  new ResponseEntity<>("Presto iniciado com sucesso!", HttpStatus.OK);

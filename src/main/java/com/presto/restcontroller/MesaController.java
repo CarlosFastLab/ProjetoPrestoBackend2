@@ -52,6 +52,7 @@ public class MesaController {
         if (mesa.isPresent()){
             pedido.setMesa(mesa.get());
             Pedido pedido1 = pedidoRepository.save(pedido);
+
             mesa.get().setPedido(pedido);
             mesaRepository.save(mesa.get());
             return new ResponseEntity<>(pedido1,HttpStatus.OK);
@@ -73,5 +74,12 @@ public class MesaController {
             return new ResponseEntity<>(pedido, HttpStatus.OK);
         }
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    }
+
+    @PutMapping("starttimer/{id}")
+    public ResponseEntity<?> start(@PathVariable("id") long id){
+
+
+        return null;
     }
 }
