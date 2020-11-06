@@ -23,9 +23,11 @@ public class Pedido implements Serializable {
 
     private String descricao;
 
-    private Double valorTotal;
+    private double valorTotal;
 
     private long maiorTempo;
+
+
 
     @ManyToMany
     @JoinTable(name = "pedido_produto",

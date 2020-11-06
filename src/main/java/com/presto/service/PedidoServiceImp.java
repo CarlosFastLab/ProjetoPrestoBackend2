@@ -1,10 +1,16 @@
 package com.presto.service;
 
+import com.presto.model.Pedido;
 import com.presto.model.Produto;
 
 import org.springframework.stereotype.Service;
 
+
+import java.util.Arrays;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+
 @Service
 public class PedidoServiceImp implements PedidoService {
 
@@ -14,10 +20,13 @@ public class PedidoServiceImp implements PedidoService {
         if (produtos.isEmpty()){
             return null;
         }
-        Double precoTotal = 0.0;
+        double precoTotal = 0.0;
         for(Produto produto : produtos){
-            precoTotal += produto.getValor();
+            precoTotal= precoTotal + produto.getValor();
+            System.out.println(produto.getValor());
         }
+
+        System.out.println(precoTotal);
         return precoTotal;
     }
 
@@ -34,4 +43,8 @@ public class PedidoServiceImp implements PedidoService {
 
         return maiorTempo;
     }
+
+
+
+
 }

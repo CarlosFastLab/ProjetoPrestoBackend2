@@ -75,4 +75,11 @@ public class MesaController {
         }
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
+
+    @PutMapping("starttimer/{id}")
+    public ResponseEntity<?> start(@PathVariable("id") long id){
+
+
+        return null;
+    }
 }
